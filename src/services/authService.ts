@@ -36,28 +36,28 @@ function encryptPassword(password:string) {
     return encryptedPassword;
 }
 
-// async function emailMustBeRegister(email:string) {
-//     const user = await authRepository.getUserByEmail(email);
-//     if(!user){
-//         throw {type: "unauthorized", message: "Incorrect email or password!"};
-//     }
-//     return user;
-// }
+async function emailMustBeRegister(email:string) {
+    const user = await authRepository.getUserByEmail(email);
+    if(!user){
+        throw err.unauthorizedError("Incorrect email or password!");
+    }
+    return user;
+}
 
-// function passwordMustMatch(inputPassword: string, userPassword:string) {
-//     const correctPassword = bcrypt.compareSync(inputPassword, userPassword);
-//     if(!correctPassword){
-//         throw {type: "unauthorized", message: "Incorrect email or password!"};
-//     } 
-//     return;
-// }
+function passwordMustMatch(inputPassword: string, userPassword:string) {
+    const correctPassword = bcrypt.compareSync(inputPassword, userPassword);
+    if(!correctPassword){
+        throw err.unauthorizedError("Incorrect email or password!");
+    } 
+    return;
+}
 
-// function generateJwtToken(userId:number) {
-//     const data = { userId }
-//     const config = { expiresIn: saltUtil.timeToJwtExpires };
-//     const token = jwt.sign(data, saltUtil.jwt, config);
-//     return token;
-// }
+function generateJwtToken(userId:number) {
+    const data = { userId }
+    const config = { expiresIn: saltUtil.timeToJwtExpires };
+    const token = jwt.sign(data, saltUtil.jwt, config);
+    return token;
+}
 
 export async function signUp(user: authRepository.UserSignUpData) {
     await emailMustNotBeRegister(user.email);
@@ -69,9 +69,9 @@ export async function signUp(user: authRepository.UserSignUpData) {
 }
 
 export async function signIn(loginInput: authRepository.UserSignInData) {
-    // const user = await emailMustBeRegister(loginInput.email);
-    // passwordMustMatch(loginInput.password, user.password);
-    // const token = generateJwtToken(user.id);
-    // await authRepository.insertSignIn({userId: user.id, token});
-    // return token;
+    const user = await emailMustBeRegister(loginInput.email);
+    passwordMustMatch(loginInput.password, user.password);
+    const token = generateJwtToken(user.id);
+    await authRepository.insertSignIn({userId: user.id});
+    return token;
 }

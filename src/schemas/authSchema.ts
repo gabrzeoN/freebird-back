@@ -11,6 +11,6 @@ export const signUpSchema = joi.object<UserSignUpDataReptPass>({
 });
 
 export const signInSchema = joi.object<UserSignInData>({
-    email: joi.string().email().trim().required(),
-    password: joi.string().required()
+    email: joi.string().email().trim(),
+    password: joi.string()
 });
