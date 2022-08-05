@@ -47,7 +47,7 @@ model User {
   createdAt  DateTime @default(now())
   countryId  Int
   country    Country  @relation(fields: [countryId], references: [id])
-  foneNumber String
+  foneNumber String   @unique
 
   Session  Session[]
   Location Location[]
