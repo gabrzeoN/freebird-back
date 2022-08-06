@@ -23,14 +23,6 @@ async function foneMustNotBeRegister(fone:string) {
     return;
 }
 
-async function countryMustBeRegister(countryName:string) {
-    const country = await countryRepository.getCountryByName(countryName);
-    if(!country){
-        throw err.notFoundError("Country not found!");
-    }
-    return country;
-}
-
 export function encryptPassword(password:string) {
     const encryptedPassword = bcrypt.hashSync(password, saltUtil.bcrypt);
     return encryptedPassword;
@@ -62,10 +54,9 @@ function generateJwtToken(userId:number) {
 export async function signUp(user: authRepository.UserSignUpDataReptPass) {
     await emailMustNotBeRegister(user.email);
     await foneMustNotBeRegister(user.foneNumber);
-    const country = await countryMustBeRegister(user.country);
     const encryptedPassword = encryptPassword(user.password);
     delete user.country;
-    await authRepository.insertSignUp({...user, password: encryptedPassword, countryId: country.id});
+    await authRepository.insertSignUp({...user, password: encryptedPassword});
     return;
 }
 
