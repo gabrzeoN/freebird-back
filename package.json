@@ -15,7 +15,7 @@
     "test": "dotenv -e .env.test prisma migrate dev && NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -i",
     "test:all": "npm run test:integrations && npm run test:unit",
     "test:units": "cross-env NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -- -i --coverage --testPathPattern=tests/units",
-    "test:integrations": "dotenv -e .env.test prisma migrate dev && cross-env NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -- -i --testPathPattern=tests/integrations"
+    "test:integrations": "dotenv -e .env.test prisma migrate dev && prisma db seed && cross-env NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -- -i --testPathPattern=tests/integrations"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"

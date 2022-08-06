@@ -23,12 +23,12 @@ async function foneMustNotBeRegister(fone:string) {
     return;
 }
 
-async function countryMustBeRegister(countryId:number) {
-    const country = await countryRepository.getCountryById(countryId);
+async function countryMustBeRegister(countryName:string) {
+    const country = await countryRepository.getCountryByName(countryName);
     if(!country){
         throw err.notFoundError("Country not found!");
     }
-    return;
+    return country;
 }
 
 export function encryptPassword(password:string) {
@@ -59,12 +59,13 @@ function generateJwtToken(userId:number) {
     return token;
 }
 
-export async function signUp(user: authRepository.UserSignUpData) {
+export async function signUp(user: authRepository.UserSignUpDataReptPass) {
     await emailMustNotBeRegister(user.email);
     await foneMustNotBeRegister(user.foneNumber);
-    await countryMustBeRegister(user.countryId);
+    const country = await countryMustBeRegister(user.country);
     const encryptedPassword = encryptPassword(user.password);
-    await authRepository.insertSignUp({...user, password: encryptedPassword});
+    delete user.country;
+    await authRepository.insertSignUp({...user, password: encryptedPassword, countryId: country.id});
     return;
 }
 
