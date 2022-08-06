@@ -31,7 +31,7 @@ async function countryMustBeRegister(countryId:number) {
     return;
 }
 
-function encryptPassword(password:string) {
+export function encryptPassword(password:string) {
     const encryptedPassword = bcrypt.hashSync(password, saltUtil.bcrypt);
     return encryptedPassword;
 }
