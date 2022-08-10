@@ -12,4 +12,5 @@ export const createSchema = joi.object<LocationInput>({
     country: joi.string().trim().max(20).required(),
     state: joi.string().trim().max(20).required(),
     city: joi.string().trim().max(20).required(),
+    picture: joi.string().uri().required(),
 });

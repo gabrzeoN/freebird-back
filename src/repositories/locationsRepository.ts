@@ -1,8 +1,8 @@
 import prisma from "../config/database.js";
-import { Location } from "@prisma/client";
+import { Location, Picture } from "@prisma/client";
 
-export type LocationInput = Omit<Location, "id" | "hostId">
-export type LocationData = LocationInput & { hostId: number}
+export type LocationInput = Omit<Location, "id" | "hostId"> & { picture: string }
+export type LocationData = LocationInput & { hostId: number }
 
 export async function getById(id:number) {
     const location = await prisma.location.findUnique({where: {id}});
