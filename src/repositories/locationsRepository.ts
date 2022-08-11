@@ -14,6 +14,19 @@ export async function getByHostId(hostId:number) {
     return location;
 }
 
+export async function getAll() {
+    const locations = await prisma.location.findMany({
+        include: {
+            Picture: {
+                select: {
+                    url: true
+                }
+            }
+        }
+    });
+    return locations;
+}
+
 export async function insert(location:LocationData) {
     return await prisma.location.create({data: location});
 }
