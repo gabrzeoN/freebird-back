@@ -5,12 +5,30 @@ export type LocationInput = Omit<Location, "id" | "hostId"> & { picture: string 
 export type LocationData = LocationInput & { hostId: number }
 
 export async function getById(id:number) {
-    const location = await prisma.location.findUnique({where: {id}});
+    const location = await prisma.location.findUnique({
+        where: {id},
+        include: {
+            Picture: {
+                select: {
+                    url: true
+                }
+            }
+        }
+    });
     return location;
 }
 
 export async function getByHostId(hostId:number) {
-    const location = await prisma.location.findMany({where: {hostId}});
+    const location = await prisma.location.findMany({
+        where: {hostId},
+        include: {
+            Picture: {
+                select: {
+                    url: true
+                }
+            }
+        }
+    });
     return location;
 }
 
