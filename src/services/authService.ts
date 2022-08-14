@@ -2,7 +2,6 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 import * as authRepository from "../repositories/authRepository.js";
-import * as countryRepository from "../repositories/countryRepository.js";
 import * as saltUtil from "../utils/saltUtils.js";
 import * as err from "../utils/errorUtils.js"
 
@@ -55,7 +54,6 @@ export async function signUp(user: authRepository.UserSignUpDataReptPass) {
     await emailMustNotBeRegister(user.email);
     await foneMustNotBeRegister(user.foneNumber);
     const encryptedPassword = encryptPassword(user.password);
-    delete user.country;
     await authRepository.insertSignUp({...user, password: encryptedPassword});
     return;
 }

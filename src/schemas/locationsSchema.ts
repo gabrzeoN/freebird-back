@@ -9,7 +9,7 @@ export const createSchema = joi.object<LocationInput>({
     pricePerNight: joi.number().integer().max(oneMillion).required(),
     isAvailable: joi.bool(),
     bedrooms: joi.number().integer().max(99).required(),
-    country: joi.string().trim().max(20).required(),
+    country: joi.string().trim().max(30).required(),
     state: joi.string().trim().max(20).required(),
     city: joi.string().trim().max(20).required(),
     picture: joi.string().uri().required(),

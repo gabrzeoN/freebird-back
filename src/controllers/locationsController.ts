@@ -7,7 +7,10 @@ import * as locationsRepository from "./../repositories/locationsRepository.js";
 export async function createLocation(req: Request, res: Response) {
     const body : locationsRepository.LocationInput = req.body;
     const userId: number = res.locals.userId;
-    const location = await locationsService.createLocation({...body, hostId: userId});
+    const location = await locationsService.createLocation({
+        ...body,
+        hostId: userId
+    });
     return res.status(201).send(location);
 }
 

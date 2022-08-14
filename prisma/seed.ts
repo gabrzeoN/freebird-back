@@ -2,22 +2,31 @@ import prisma from "../src/config/database.js";
 import { User, Location, Picture } from "@prisma/client";
 import { encryptPassword } from "../src/services/authService.js";
 
-const users: User[] = [
+const users = [
     {
-        id: 1,
+        // id: 1,
         country: "Brazil",
         fullName: "Administrator",
         email: "admin@gmail.com",
         password: encryptPassword("adminadmin"),
         foneNumber: "4499988776655",
         createdAt: new Date()
+    },
+    {
+        // id: 2,
+        country: "Brazil",
+        fullName: "Admin",
+        email: "admin@hotmail.com",
+        password: encryptPassword("adminadmin"),
+        foneNumber: "4499988776677",
+        createdAt: new Date()
     }
 ]
 
-const locations: Location[] = [
+const locations = [
     {
-        id: 1,
-        hostId: 1,
+        // id: 1,
+        hostId: 2,
         bedrooms: 1,
         pricePerNight: 185,
         description: "NATURAVE is a treetops unique stay experience. A one of a kind cabin where, from the comfort of your bedroom, you can enjoy the birds singing, sightseeing families of monkeys passing in the mountain just in front of you or just enjoy a cup of coffee surrounded by the peace of Monteverde.",
@@ -27,18 +36,18 @@ const locations: Location[] = [
         isAvailable: true,
     },
     {
-        id: 2,
+        // id: 2,
         hostId: 1,
         bedrooms: 1,
         pricePerNight: 110,
         description: "Learn and share with the Andean people with all the comfort of a hotel but at ground level. The tent has a spring mattress, feather duvet, and soft blankets.. it's a luxury. The decoration is typical of the area, handmade and in some cases it is made by the same Francisca, owner of the house. There is electrical connection inside the tent and even an electric heating. The bathroom is another part of luxury, nice finishes and views, it is shared by 3 tents, maximum 6 people.",
-        country: "Brazil",
-        state: "Parana",
-        city: "Maringa",
+        country: "Peru",
+        state: "Cusco",
+        city: "Ollantaytambo",
         isAvailable: true,
     },
     {
-        id: 3,
+        // id: 3,
         hostId: 1,
         bedrooms: 1,
         pricePerNight: 98,
@@ -49,7 +58,7 @@ const locations: Location[] = [
         isAvailable: true,
     },
     {
-        id: 4,
+        // id: 4,
         hostId: 1,
         bedrooms: 6,
         pricePerNight: 3450,
@@ -61,84 +70,84 @@ const locations: Location[] = [
     },
 ];
 
-const pictures: Picture[] = [
+const pictures = [
     {
-        id: 1,
+        // id: 1,
         locationId: 1,
         url: "https://a0.muscache.com/im/pictures/379f84f9-d418-41ad-b1b3-e1f9d007124d.jpg?im_w=1200"
     },
     {
-        id: 2,
+        // id: 2,
         locationId: 1,
         url: "https://a0.muscache.com/im/pictures/miso/Hosting-53292029/original/3e737e92-7f4a-455b-9afa-73158ccf2045.jpeg?im_w=720"
     },
     {
-        id: 3,
+        // id: 3,
         locationId: 1,
         url: "https://a0.muscache.com/im/pictures/1e9851ac-cb69-4dd4-994d-a87e1006e6cb.jpg?im_w=720"
     },
     {
-        id: 4,
+        // id: 4,
         locationId: 1,
         url: "https://a0.muscache.com/im/pictures/miso/Hosting-53292029/original/2c116e6a-6748-4f3f-b371-bf79a9110dcd.jpeg?im_w=720"
     },
     {
-        id: 5,
+        // id: 5,
         locationId: 1,
         url: "https://a0.muscache.com/im/pictures/miso/Hosting-53292029/original/9640abf5-1c14-40bc-803a-b99fa2b5ef5c.jpeg?im_w=720"
     },
     {
-        id: 6,
+        // id: 6,
         locationId: 2,
         url: "https://a0.muscache.com/im/pictures/2fb26876-1352-4c34-afb8-ab6b1b845a60.jpg?im_w=1200"
     },
     {
-        id: 7,
+        // id: 7,
         locationId: 2,
         url: "https://a0.muscache.com/im/pictures/a188ccdb-7d3f-41b1-baac-9c586c9de45b.jpg?im_w=720"
     },
     {
-        id: 8,
+        // id: 8,
         locationId: 2,
         url: "https://a0.muscache.com/im/pictures/a947e759-77ff-4d60-97d2-569761782f9f.jpg?im_w=720"
     },
     {
-        id: 9,
+        // id: 9,
         locationId: 3,
         url: "https://a0.muscache.com/im/pictures/5b7b6ae3-d173-45fd-8165-728af70f2a8b.jpg?im_w=1200"
     },
     {
-        id: 10,
+        // id: 10,
         locationId: 3,
         url: "https://a0.muscache.com/im/pictures/c8907b14-a0f4-40fd-9140-c8d251873589.jpg?im_w=1200"
     },
     {
-        id: 11,
+        // id: 11,
         locationId: 3,
         url: "https://a0.muscache.com/im/pictures/daf2b2f8-8208-47a6-8109-3ad5f431a85c.jpg?im_w=720"
     },
     {
-        id: 12,
+        // id: 12,
         locationId: 3,
         url: "https://a0.muscache.com/im/pictures/68a36016-0e55-44a6-a542-30af188e9a2d.jpg?im_w=720"
     },
     {
-        id: 13,
+        // id: 13,
         locationId: 4,
         url: "https://a0.muscache.com/im/pictures/9cca0574-0703-4340-984b-bab0f46e7d6c.jpg?im_w=1200"
     },
     {
-        id: 14,
+        // id: 14,
         locationId: 4,
         url: "https://a0.muscache.com/im/pictures/ede52fab-c4ef-4b41-9612-a3108f0cdfa0.jpg?im_w=720"
     },
     {
-        id: 15,
+        // id: 15,
         locationId: 4,
         url: "https://a0.muscache.com/im/pictures/36bcc4a1-aa66-403b-b9ee-998fdf898545.jpg?im_w=1200"
     },
     {
-        id: 16,
+        // id: 16,
         locationId: 4,
         url: "https://a0.muscache.com/im/pictures/4c25f43c-e219-44b6-97b2-3d918d2a49f7.jpg?im_w=720"
     },
@@ -164,24 +173,18 @@ const locationsLinks = [
 
 async function main() {
     for (let i = 0; i < users.length; i++) {
-        await prisma.user.upsert({
-            where: { id: users[i].id },
-            update: {},
-            create: users[i]
+        await prisma.user.create({
+            data: users[i]
         });
     }
     for (let i = 0; i < locations.length; i++) {
-        await prisma.location.upsert({
-            where: { id: locations[i].id },
-            update: {},
-            create: locations[i]
+        await prisma.location.create({
+            data: locations[i]
         });
     }
     for (let i = 0; i < pictures.length; i++) {
-        await prisma.picture.upsert({
-            where: { id: pictures[i].id },
-            update: {},
-            create: pictures[i]
+        await prisma.picture.create({
+            data: pictures[i]
         });
     }
 }
