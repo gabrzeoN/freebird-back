@@ -22,5 +22,11 @@ export async function getLocation(req: Request, res: Response) {
         throw err.notAcceptableError("Id must be a number!");
     }
     const location = await locationsService.getLocation(id);
-    return res.status(200).send({location});
+    return res.status(200).send(location);
+}
+
+export async function getLocationsFromUser(req: Request, res: Response) {
+    const userId: number = res.locals.userId;
+    const locations = await locationsService.getLocationsFromUser(userId);
+    return res.status(200).send(locations);
 }

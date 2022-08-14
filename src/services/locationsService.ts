@@ -20,3 +20,8 @@ export async function getLocation(id: number) {
     const location = await locationsRepository.getById(id);
     return location;
 }
+
+export async function getLocationsFromUser(hostId: number) {
+    const locations = await locationsRepository.getByHostId(hostId);
+    return locations;
+}
