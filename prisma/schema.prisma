@@ -19,7 +19,6 @@ model User {
 
   Session  Session[]
   Location Location[]
-  Rent     Rent[]
 
   @@map("users")
 }
@@ -45,7 +44,6 @@ model Location {
   state         String
   city          String
   Picture       Picture[]
-  Rent          Rent[]
 
   @@map("locations")
 }
@@ -57,17 +55,4 @@ model Picture {
   url        String
 
   @@map("pictures")
-}
-
-model Rent {
-  id         Int      @id @default(autoincrement())
-  renterId   Int
-  renter     User     @relation(fields: [renterId], references: [id])
-  locationId Int
-  location   Location @relation(fields: [locationId], references: [id])
-  checkin    DateTime @default(now())
-  checkout   DateTime @default(now())
-  totalPrice Int
-
-  @@map("rents")
 }
