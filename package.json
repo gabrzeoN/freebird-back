@@ -4,6 +4,9 @@
   "description": "",
   "main": "server.js",
   "type": "module",
+  "engines": {
+    "node": "14.17.0"
+  },
   "scripts": {
     "build:onebyone": "tsc ./src/server.ts",
     "build": "tsc",
