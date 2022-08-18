@@ -4,7 +4,7 @@ import { Location, Picture } from "@prisma/client";
 export type LocationInput = Omit<Location, "id" | "hostId"> & { picture: string }
 export type LocationData = LocationInput & { hostId: number }
 
-export async function getById(id:number) {
+async function getById(id:number) {
     const location = await prisma.location.findUnique({
         where: {id},
         include: {
@@ -18,7 +18,7 @@ export async function getById(id:number) {
     return location;
 }
 
-export async function getByHostId(hostId:number) {
+async function getByHostId(hostId:number) {
     const location = await prisma.location.findMany({
         where: {hostId},
         include: {
@@ -32,7 +32,7 @@ export async function getByHostId(hostId:number) {
     return location;
 }
 
-export async function getAll() {
+async function getAll() {
     const locations = await prisma.location.findMany({
         include: {
             Picture: {
@@ -45,6 +45,13 @@ export async function getAll() {
     return locations;
 }
 
-export async function insert(location:LocationData) {
+async function insert(location:LocationData) {
     return await prisma.location.create({data: location});
 }
+
+export const locationsRepository = {
+    getById,
+    getByHostId,
+    getAll,
+    insert
+};

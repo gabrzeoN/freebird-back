@@ -1,11 +1,10 @@
 import { Response, Request } from "express";
 import * as err from "../utils/errorUtils.js";
-
 import * as locationsService from "../services/locationsService.js";
-import * as locationsRepository from "./../repositories/locationsRepository.js";
+import { LocationInput } from "./../repositories/locationsRepository.js";
 
 export async function createLocation(req: Request, res: Response) {
-    const body : locationsRepository.LocationInput = req.body;
+    const body : LocationInput = req.body;
     const userId: number = res.locals.userId;
     const location = await locationsService.createLocation({
         ...body,
