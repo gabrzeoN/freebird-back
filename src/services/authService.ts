@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
-import * as authRepository from "../repositories/authRepository.js";
+import { authRepository, UserSignUpData, UserSignInData } from "../repositories/authRepository.js";
 import * as saltUtil from "../utils/saltUtils.js";
 import * as err from "../utils/errorUtils.js"
 
@@ -50,15 +50,15 @@ function generateJwtToken(userId:number) {
     return token;
 }
 
-export async function signUp(user: authRepository.UserSignUpDataReptPass) {
+export async function signUp(user: UserSignUpData) {
     await emailMustNotBeRegister(user.email);
     await foneMustNotBeRegister(user.foneNumber);
     const encryptedPassword = encryptPassword(user.password);
     await authRepository.insertSignUp({...user, password: encryptedPassword});
-    return;
+    return 0;
 }
 
-export async function signIn(loginInput: authRepository.UserSignInData) {
+export async function signIn(loginInput: UserSignInData) {
     const user = await emailMustBeRegister(loginInput.email);
     passwordMustMatch(loginInput.password, user.password);
     const token = generateJwtToken(user.id);
