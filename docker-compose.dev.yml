@@ -1,0 +1,44 @@
+version: '3'
+services:
+
+  freebird-postgresql-dev:
+    container_name: freebird-postgresql-dev
+    image: postgres:14.5
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DATABASE: ${POSTGRES_DATABASE}
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    volumes:
+      - freebird-postgres-data:/var/lib/postgresql/data
+    command: postgres -p ${POSTGRES_PORT}
+
+  freebird_back:
+    container_name: freebird_back
+    build: 
+      context: ./
+      dockerfile: Dockerfile.dev
+    depends_on:
+      - freebird-postgresql-dev
+    ports:
+      - ${PORT}:${PORT}
+    environment:
+      - name=value
+    volumes:
+      - ./prisma:/app/freebird_back/prisma
+      - ./src:/app/freebird_back/src
+      - ./tests:/app/freebird_back/tests
+    command: bash -c "npx prisma migrate dev && npm run dev"
+
+  # freebird-dev:
+  #   container_name: freebird-dev
+  #   image: gabrzeon/freebird_back
+  #   depends_on:
+  #     - freebird-postgresql-dev
+  #   ports:
+  #     - ${PORT}:${PORT}
+  #   command: bash -c "npx prisma migrate dev && npm run dev"
+
+volumes:
+  freebird-postgres-data:

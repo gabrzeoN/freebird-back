@@ -2,7 +2,7 @@ import chalk from "chalk";
 import dotenv from "dotenv";
 
 import app from "./app.js";
-
+console.log("oi")
 dotenv.config();
 const port = (+process.env.PORT || 4000);
 app.listen(port, () => {
