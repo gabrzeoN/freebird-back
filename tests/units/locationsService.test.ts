@@ -3,7 +3,6 @@ import * as locationsService from "../../src/services/locationsService.js";
 import { locationsRepository } from "../../src/repositories/locationsRepository.js";
 import * as locationsFactory from "../factories/locationsFactory.js";
 import { picturesRepository } from "../../src/repositories/picturesRepository.js";
-import * as err from "../../src/utils/errorUtils.js"
 
 beforeEach(() => {
     jest.clearAllMocks();
@@ -11,9 +10,12 @@ beforeEach(() => {
 });
 
 describe("locationsSevice test suite", () => {
+  it("should pass", () => {
+    expect(0).toBe(0);
+  });
     it("should insert a location", async () => {
         const location = locationsFactory.locationInput();
-        jest.spyOn(locationsRepository, 'insert').mockImplementationOnce(():any => { return {...location , id: 1}});
+        jest.spyOn(locationsRepository, 'insert').mockImplementationOnce(():any => { return {...location}});
         jest.spyOn(picturesRepository, 'insert').mockImplementationOnce(():any => null);
         const promise = locationsService.createLocation(location);
         expect(locationsRepository.insert).toHaveBeenCalled();

@@ -23,8 +23,6 @@ services:
       - freebird-postgresql-dev
     ports:
       - ${PORT}:${PORT}
-    environment:
-      - name=value
     volumes:
       - ./prisma:/app/freebird_back/prisma
       - ./src:/app/freebird_back/src

@@ -14,4 +14,4 @@ EXPOSE 5000
 
 # CMD ["npm", "run", "dev"]
 
-CMD [ "echo", "Dockerfile on Developer mode" ]
+CMD [ "echo", "Dockerfile on Test mode" ]

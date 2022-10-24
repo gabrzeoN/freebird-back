@@ -8,6 +8,8 @@
     "node": "14.17.0"
   },
   "scripts": {
+    "compose:dev": "docker-compose --env .env.dev -f ./docker-compose.dev.yml up",
+    "compose:test": "docker-compose --env .env.test -f ./docker-compose.test.yml up",
     "build:onebyone": "tsc ./src/server.ts",
     "build": "tsc",
     "start": "node ./dist/src/server.js",
@@ -18,7 +20,7 @@
     "studio:test": "dotenv -e .env.test npx prisma studio",
     "test": "dotenv -e .env.test prisma migrate dev && NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -i",
     "test:all": "npm run test:integrations && npm run test:unit",
-    "test:units": "cross-env NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -- -i --coverage --testPathPattern=tests/units",
+    "test:units": "cross-env NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -- -i --coverage --testPathPattern=tests/units --collectCoverageFrom=src/services/*",
     "test:integrations": "dotenv -e .env.test prisma migrate dev && prisma db seed && cross-env NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -- -i --testPathPattern=tests/integrations"
   },
   "prisma": {
